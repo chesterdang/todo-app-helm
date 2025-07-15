@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.frontend.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.frontend.labelName }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.frontend.selector }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.frontend.selector }}
+    spec:
+      containers:
+      - name: {{ .Values.frontend.containerName }}
+        image: {{ .Values.frontend.image }}
+        ports:
+        - containerPort: {{ .Values.frontend.containerPort }}
+          name: {{ .Values.frontend.portName }}
+        resources:
+          requests:
+            memory: {{ .Values.frontend.resources.requests.memory | quote }}
+            cpu: {{ .Values.frontend.resources.requests.cpu | quote }}
+          limits:
+            memory: {{ .Values.frontend.resources.limits.memory | quote }}
+            cpu: {{ .Values.frontend.resources.limits.cpu | quote }} 

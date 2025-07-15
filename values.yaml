@@ -1,0 +1,97 @@
+# Default values for todo-app Helm chart.
+
+backend:
+  name: backend
+  labelName: todo-app-backend
+  selector: backend
+  containerName: backend
+  image: maitrungduc1410/k8s-ingress-demo-backend:latest
+  containerPort: 3000
+  portName: pod-http
+  secretName: todo
+  serviceName: backend
+  serviceType: ClusterIP
+  servicePortName: svc-http
+  serviceProtocol: TCP
+  servicePort: 80
+  targetPort: pod-http
+  resources:
+    requests:
+      memory: "50Mi"
+      cpu: "50m"
+    limits:
+      memory: "75Mi"
+      cpu: "75m"
+
+frontend:
+  name: frontend
+  labelName: todo-app-frontend
+  selector: frontend
+  containerName: frontend
+  image: maitrungduc1410/k8s-ingress-demo-frontend:latest
+  containerPort: 80
+  portName: pod-http
+  serviceName: frontend
+  serviceType: ClusterIP
+  servicePortName: svc-http
+  serviceProtocol: TCP
+  servicePort: 80
+  targetPort: pod-http
+  resources:
+    requests:
+      memory: "50Mi"
+      cpu: "50m"
+    limits:
+      memory: "75Mi"
+      cpu: "75m"
+
+mysql:
+  statefulsetName: db
+  labelName: todo-app-db
+  selector: db
+  containerName: db
+  image: mysql:8
+  containerPort: 3306
+  portName: mysql
+  secretName: todo
+  serviceName: todo-app-mysql
+  serviceType: ClusterIP
+  servicePortName: mysql
+  serviceProtocol: TCP
+  port: 3306
+  targetPort: mysql
+  protocol: TCP
+  labelComponent: database
+  pvcName: data-todo-app-mysql-0
+  accessMode: ReadWriteOnce
+  storage: 100Mi
+  storageClass: local-path
+  resources:
+    requests:
+      memory: "75Mi"
+      cpu: "50m"
+    limits:
+      memory: "100Mi"
+      cpu: "50m"
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  name: todo
+  className: nginx
+  host: dpercs.io.vn
+  cloudflareProxied: true
+  cloudflareTarget: 22c0f4d0-f0ac-4866-bfc6-03b0acb053f1.cfargotunnel.com
+
+secret:
+  name: todo
+  MYSQL_HOST: todo-app-mysql
+  MYSQL_PORT: "3306"
+  MYSQL_USER: danh
+  MYSQL_PASSWORD: danh123
+  MYSQL_DATABASE: todo_app
+  DATABASE_URL: "mysql://danh:danh123@todo-app-mysql:3306/todo_app"
+  MYSQL_ROOT_PASSWORD: rootpass 

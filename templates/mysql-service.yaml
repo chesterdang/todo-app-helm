@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.mysql.serviceName }}
+  labels:
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    app.kubernetes.io/name: {{ .Values.mysql.labelName }}
+    app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: {{ .Values.mysql.labelComponent }}
+spec:
+  type: {{ .Values.mysql.serviceType }}
+  ports:
+    - port: {{ .Values.mysql.port }}
+      targetPort: {{ .Values.mysql.targetPort }}
+      protocol: {{ .Values.mysql.protocol }}
+      name: {{ .Values.mysql.portName }}
+  selector:
+    app: {{ .Values.mysql.selector }}

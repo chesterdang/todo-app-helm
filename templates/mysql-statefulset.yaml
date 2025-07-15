@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.mysql.statefulsetName }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.mysql.labelName }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.mysql.selector }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mysql.selector }}
+    spec:
+      containers:
+      - name: {{ .Values.mysql.containerName }}
+        image: {{ .Values.mysql.image }}
+        ports:
+        - containerPort: {{ .Values.mysql.containerPort }}
+          name: {{ .Values.mysql.portName }}
+        resources:
+          requests:
+            memory: {{ .Values.mysql.resources.requests.memory | quote }}
+            cpu: {{ .Values.mysql.resources.requests.cpu | quote }}
+          limits:
+            memory: {{ .Values.mysql.resources.limits.memory | quote }}
+            cpu: {{ .Values.mysql.resources.limits.cpu | quote }}
+        envFrom:
+        - secretRef:
+            name: {{ .Values.mysql.secretName }} 

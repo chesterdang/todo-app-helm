@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/component: {{ .Values.mysql.labelComponent }}
+    app.kubernetes.io/name: {{ .Values.mysql.labelName }}
+  name: {{ .Values.mysql.pvcName }}
+spec:
+  accessModes:
+  - {{ .Values.mysql.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.mysql.storage }}
+  storageClassName: {{ .Values.mysql.storageClass }} 
