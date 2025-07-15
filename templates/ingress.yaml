@@ -20,7 +20,7 @@ spec:
             name: {{ .Values.frontend.serviceName }}
             port:
               name: {{ .Values.frontend.servicePortName }}
-      - path: /todo/api
+      - path: /todo/api/
         pathType: Prefix
         backend:
           service:
