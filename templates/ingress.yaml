@@ -27,4 +27,11 @@ spec:
             name: {{ .Values.backend.serviceName }}
             port:
               name: {{ .Values.backend.servicePortName }}
+      - path: /jenkins
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.jenkins.serviceName }}
+            port:
+              number: {{ .Values.jenkins.port }}
 {{- end }} 

@@ -74,6 +74,10 @@ mysql:
       memory: "2Gi"
       cpu: "750m"
 
+jenkins:
+  serviceName: jenkins
+  port: 8080
+  
 service:
   type: ClusterIP
   port: 80
