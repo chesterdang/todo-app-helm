@@ -13,21 +13,21 @@ spec:
   - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /
+      - path: /todo/
         pathType: Prefix
         backend:
           service:
             name: {{ .Values.frontend.serviceName }}
             port:
               name: {{ .Values.frontend.servicePortName }}
-      - path: /api
+      - path: /todo/api
         pathType: Prefix
         backend:
           service:
             name: {{ .Values.backend.serviceName }}
             port:
               name: {{ .Values.backend.servicePortName }}
-      - path: /jenkins
+      - path: /
         pathType: Prefix
         backend:
           service:
