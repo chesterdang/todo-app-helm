@@ -75,7 +75,7 @@ mysql:
       cpu: "750m"
 
 jenkins:
-  serviceName: jenkins-external-access
+  serviceName: jenkins-external-access.jenkins.svc.cluster.local
   port: 8080
   namespace: jenkins
 service:
