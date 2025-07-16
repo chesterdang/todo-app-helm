@@ -27,6 +27,13 @@ spec:
             name: {{ .Values.frontend.serviceName }}
             port:
               name: {{ .Values.frontend.servicePortName }}
+      - path: /sonarqube/
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.sonarqube.serviceName }}
+            port:
+              number: {{ .Values.sonarqube.port }}
       - path: /
         pathType: Prefix
         backend:
