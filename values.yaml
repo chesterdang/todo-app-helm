@@ -76,7 +76,7 @@ mysql:
 
 sonarqube:
   serviceName: sonarqube-external-access
-  port: 8080
+  port: 9000
   namespace: sonarqube
 
 jenkins:
