@@ -74,6 +74,11 @@ mysql:
       memory: "2Gi"
       cpu: "750m"
 
+sonarqube:
+  serviceName: sonarqube-external-access
+  port: 8080
+  namespace: sonarqube
+
 jenkins:
   serviceName: jenkins-external-access
   port: 8080
