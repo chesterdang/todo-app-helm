@@ -77,7 +77,7 @@ mysql:
 jenkins:
   serviceName: jenkins
   port: 8080
-  
+  namespace: jenkins
 service:
   type: ClusterIP
   port: 80
