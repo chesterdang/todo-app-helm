@@ -32,7 +32,6 @@ spec:
         backend:
           service:
             name: {{ .Values.jenkins.serviceName }}
-            namespace: {{ .Values.jenkins.namespace }}
             port:
               number: {{ .Values.jenkins.port }}
 {{- end }} 
