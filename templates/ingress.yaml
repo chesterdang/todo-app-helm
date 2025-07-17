@@ -13,20 +13,6 @@ spec:
   - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /todo/api/
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.backend.serviceName }}
-            port:
-              name: {{ .Values.backend.servicePortName }}
-      - path: /todo/
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.frontend.serviceName }}
-            port:
-              name: {{ .Values.frontend.servicePortName }}
       - path: /sonarqube/
         pathType: Prefix
         backend:
@@ -34,11 +20,25 @@ spec:
             name: {{ .Values.sonarqube.serviceName }}
             port:
               number: {{ .Values.sonarqube.port }}
-      - path: /
+      - path: /jenkins/
         pathType: Prefix
         backend:
           service:
             name: {{ .Values.jenkins.serviceName }}
             port:
               number: {{ .Values.jenkins.port }}
+      - path: /api/
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.backend.serviceName }}
+            port:
+              name: {{ .Values.backend.servicePortName }}
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.frontend.serviceName }}
+            port:
+              name: {{ .Values.frontend.servicePortName }}
 {{- end }} 
